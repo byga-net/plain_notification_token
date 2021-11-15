@@ -28,6 +28,8 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
     private Context context;
     private MethodChannel methodChannel;
     
+    PlainNotificationTokenPlugin() {}
+
     /**
      * Plugin registration.
      */
