@@ -33,7 +33,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
      */
     @SuppressWarnings("deprecation")
     public static void registerWith(Registrar registrar) {
-        new FlutterRingtonePlayerPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
+        new PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
     }
 
     @Override
