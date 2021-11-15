@@ -33,7 +33,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
      */
     @SuppressWarnings("deprecation")
     public static void registerWith(Registrar registrar) {
-        new PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
+        PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
     }
 
     @Override
