@@ -28,12 +28,14 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
     private Context context;
     private MethodChannel methodChannel;
     
+    PlainNotificationTokenPlugin() {}
+
     /**
      * Plugin registration.
      */
     @SuppressWarnings("deprecation")
     public static void registerWith(Registrar registrar) {
-        PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
+        new PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
     }
 
     @Override
