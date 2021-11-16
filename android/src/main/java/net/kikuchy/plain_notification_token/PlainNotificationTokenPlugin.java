@@ -24,30 +24,30 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * PlainNotificationTokenPlugin
  */
-public class PlainNotificationTokenPlugin extends BroadcastReceiver implements FlutterPlugin {
+public class PlainNotificationTokenPlugin extends BroadcastReceiver implements MethodCallHandler, FlutterPlugin {
     private Context context;
     private MethodChannel methodChannel;
     
     public PlainNotificationTokenPlugin() {}
 
     public static void registerWith(Registrar registrar) {
-        new PlainNotificationTokenPlugin().onAttachedToEngine(registrar.context(), registrar.messenger());
+        new PlainNotificationTokenPlugin().onAttached(registrar.context(), registrar.messenger());
     }
 
     @override
-    public void onAttachedToFlutterEngine(FlutterPluginBinding binding) {   
-        onAttachedToEngine(binding.getApplicationContext(), binding.getBinaryMessenger());
+    public void onAttachedToEngine(FlutterPluginBinding binding) {   
+        onAttached(binding.getApplicationContext(), binding.getBinaryMessenger());
     }
 
     @override
-    public void onDetachedFromFlutterEngine(FlutterPluginBinding binding) {
+    public void onDetachedFromEngine(FlutterPluginBinding binding) {
         context = null;
         methodChannel.setMethodCallHandler(null);
         methodChannel = null;
 
     }
 
-    private void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
+    private void onAttached(Context applicationContext, BinaryMessenger messenger) {
         this.context = applicationContext;
         this.methodChannel = new MethodChannel(messenger, "plain_notification_token");
         methodChannel.setMethodCallHandler(this);
@@ -63,7 +63,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements F
         FirebaseApp.initializeApp(registrar.context());
     }
 
-    @Override
+    @override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getToken")) {
             FirebaseInstanceId.getInstance()
@@ -86,7 +86,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements F
         }
     }
 
-    @Override
+    @override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
 
