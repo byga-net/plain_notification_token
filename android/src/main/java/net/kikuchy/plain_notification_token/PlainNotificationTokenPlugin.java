@@ -34,12 +34,12 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
         new PlainNotificationTokenPlugin().onAttached(registrar.context(), registrar.messenger());
     }
 
-    @override
+    @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {   
         onAttached(binding.getApplicationContext(), binding.getBinaryMessenger());
     }
 
-    @override
+    @Override
     public void onDetachedFromEngine(FlutterPluginBinding binding) {
         context = null;
         methodChannel.setMethodCallHandler(null);
@@ -63,7 +63,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
         FirebaseApp.initializeApp(registrar.context());
     }
 
-    @override
+    @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getToken")) {
             FirebaseInstanceId.getInstance()
@@ -86,7 +86,7 @@ public class PlainNotificationTokenPlugin extends BroadcastReceiver implements M
         }
     }
 
-    @override
+    @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
 
